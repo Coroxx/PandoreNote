@@ -50,7 +50,7 @@ class MainController extends Controller
             'slug' => $slug,
         ]);
 
-        $link = 'https://pandorenote.tk/note/' . $slug ;
+        $link = 'https://pandorenote.xyz/note/' . $slug ;
 
         return back()->with(['success' => $link]);
     }
