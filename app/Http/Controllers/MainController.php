@@ -70,7 +70,7 @@ class MainController extends Controller
             'slug' => $slug,
         ]);
 
-        $link = route('home') . "/" . "note/" . $slug ;
+        $link = route('home') . '/' . 'note/' . $slug ;
 
         return back()->with(['success' => $link]);
     }
