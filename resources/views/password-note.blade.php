@@ -15,7 +15,7 @@
 </head>
 
 <body class="" style="background-color : #1d1d1d">
-    <div id="content fadeIn">
+    <div id="content" class="fadeIn">
 
 
         <header>
@@ -52,36 +52,41 @@
             @if (!isset($note))
                 <div class="text-red-500 py-2 text-xl px-2 md:px-0 md:ml-2.5">
                     <p class="font-default">
-                        Désolé cette note n'existe pas ou elle a déjà été lue
+                        Désolé cette note n'existe pas, elle a déjà été lue ou sa date d'expiration est dépassée
                     </p>
                 </div>
             @else
                 <form action="{{ route('note.decrypt', $note->slug) }}" method="POST">
                     @csrf
                     <div class="ml-2.5 mt-10">
-                        <h2 class="font-default px-2 md:px-0 font-bold text-xl text-white">Entrez le mot de passe de la
-                            note</h2>
-                        <input type="password" required
-                            class="rounded-sm focus:outline-none text-white px-2 py-0.5 w-64 mt-2"
-                            style="background-color : #585858" name="decrypt_password">
-                        <br>
-                        <br>
-                        @if ($errors->any())
-                            <div class="text-red-500 py-2">
-                                <p class="font-default">
-                                    {{ $errors->first() }}
-                                </p>
-                            </div>
+                        @if ($password)
+                            <h2 class="font-default px-2 md:px-0 font-bold text-xl text-white">Entrez le mot de passe de
+                                la
+                                note</h2>
+                            <input type="password" required
+                                class="rounded-sm focus:outline-none text-white px-2 py-0.5 w-64 mt-2"
+                                style="background-color : #585858" name="decrypt_password">
+                            <br>
+                            <br>
+                            @if ($errors->any())
+                                <div class="text-red-500 py-2">
+                                    <p class="font-default">
+                                        {{ $errors->first() }}
+                                    </p>
+                                </div>
 
+                            @endif
                         @endif
                         <input type="submit" style="background-color : #585858"
                             class="text-center focus:outline-none text-white align-middle px-4 font-default font-semibold cursor-pointer pt-1.5 pb-2 text-xl rounded"
                             value="Déchiffrer">
-                        <p class="font-default text-white mt-8 px-2 md:px-0">Après avoir déchiffré cette note, elle sera
+                        <p class="font-default text-white mt-8 px-2 md:px-0">Après avoir déchiffré cette note, elle
+                            sera
                             supprimée de
                             la
                             base
                             de donnée</p>
+
                     </div>
                 </form>
             @endif

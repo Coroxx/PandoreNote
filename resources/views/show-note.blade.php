@@ -15,9 +15,7 @@
 </head>
 
 <body class="" style="background-color : #1d1d1d">
-    <div id="content fadeIn">
-
-
+    <div id="content" class="fadeIn">
         <header>
             <div id="header" class="py-4 w-full text-white">
                 <div class="ml-6">

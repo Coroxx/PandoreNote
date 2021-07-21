@@ -15,14 +15,13 @@ class MainController extends Controller
         request()->validate(
             [
             'text' => 'string|required|max:20000',
-            'encrypt_password' => 'string|min:6|required|max:100',
+            'encrypt_password' => 'string|min:6|max:100|nullable',
         ],
             [
                 'text.required' => 'Ce champ est obligatoire',
                 'text.string' => 'Le texte est vide ou une une erreur est survenue',
                 'text.max' => 'La limite est de 20 000 caractères.',
                 'encrypt_password.string' => 'Désolé une erreur est survenue',
-                'encrypt_password.required' => 'Ce champ est obligatoire',
                 'encrypt_password.min' => 'Le mot de passe doit faire au moins 6 caractères',
                 'encrypt_password.max' => 'Le mot de passe ne peux pas faire plus de 100 caractères, mollo l\'asticot !'
             ]
@@ -43,14 +42,35 @@ class MainController extends Controller
                 }
             }
         }
+
+        if (request()->expiration_date !== 'never') {
+            if (request()->expiration_date === '1_hour') {
+                $expiration_date = date_format(now()->addHours(1), 'Y-m-d H:i:s');
+            } elseif (request()->expiration_date === '1_day') {
+                $expiration_date = date_format(now()->addDays(1), 'Y-m-d H:i:s');
+            } elseif (request()->expiration_date === '1_month') {
+                $expiration_date = date_format(now()->addMonths(1), 'Y-m-d H:i:s');
+            } elseif (request()->expiration_date === '1_week') {
+                $expiration_date = date_format(now()->addWeeks(1), 'Y-m-d H:i:s');
+            }
+        } else {
+            $expiration_date = null ;
+        }
+
+        if (request()->encrypt_password) {
+            $password = Hash::make(request()->encrypt_password);
+        } else {
+            $password = 'none' ;
+        }
         
         Note::create([
             'text' => $text,
-            'password' => Hash::make(request()->encrypt_password),
+            'expiration_date' => $expiration_date,
+            'password' => $password,
             'slug' => $slug,
         ]);
 
-        $link = 'https://pandorenote.tk/note/' . $slug ;
+        $link = route('home') . "/" . "note/" . $slug ;
 
         return back()->with(['success' => $link]);
     }
@@ -63,9 +83,19 @@ class MainController extends Controller
             return view('password-note');
         } else {
             $note = $note->first();
-        }
 
-        return view('password-note', compact('note'));
+            if ($note->expiration_date && $note->expiration_date < now()) {
+                $note->delete();
+                return view('password-note');
+            }
+            
+            if ($note->password === "none") {
+                $password = false;
+            } else {
+                $password = true;
+            }
+        }
+        return view('password-note', compact('note', 'password'));
     }
 
     public function decrypt($slug)
@@ -78,7 +108,6 @@ class MainController extends Controller
         ]);
         
         $note = Note::where('slug', $slug)->get();
-        // dd($slug);
 
 
         if ($note->isEmpty()) {
@@ -87,13 +116,17 @@ class MainController extends Controller
             $note = $note->first();
         }
 
-        if (Hash::check(request()->decrypt_password, $note->password)) {
-            $note->text = Crypt::decryptString($note->text);
+        if ($note->password !== "none") {
+            if (Hash::check(request()->decrypt_password, $note->password)) {
+                $note->text = Crypt::decryptString($note->text);
+            } else {
+                return back()->withErrors(['bad_password' => 'Mot de passe incorrect']);
+            }
         } else {
-            return back()->withErrors(['bad_password' => 'Mot de passe incorrect']);
+            $note->text = Crypt::decryptString($note->text);
         }
 
-        $note->delete();
+        // $note->delete();
 
         return view('show-note', compact('note'));
     }

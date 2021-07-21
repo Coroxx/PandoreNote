@@ -1,4 +1,4 @@
-# PandoreNote.tk
+# https://pandorenote.xyz
 
 ![alt text](https://i.ibb.co/qMhxgcs/image.png)
 

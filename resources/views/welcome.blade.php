@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="PandoreNote, des notes chiffrées et autodestructrice">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,8 +16,8 @@
 </head>
 
 
-<body class="" style="background-color : #1d1d1d">
-    <div id="content fadeIn">
+<body style="background-color : #1d1d1d">
+    <div id="content" class="fadeIn">
 
 
         <header>
@@ -75,17 +76,11 @@
 
                 <div class="mt-4">
                     <label for="password_input" class="px-2 md:px-0 font-default font-semibold text-lg text-white">Mot
-                        de passe
-                        (Il
-                        sera
-                        obligatoire
-                        lors du
-                        déchiffrement de la
-                        note)
+                        de passe (Optionnel)
                     </label>
                     <br>
 
-                    <input type="text" required name="encrypt_password"
+                    <input type="text" name="encrypt_password"
                         class="text-white px-2 font-default focus:outline-none py-1 mt-2 rounded-sm"
                         style="background-color : #585858" id="password_input">
                     @error('encrypt_password')
@@ -97,6 +92,25 @@
                     @enderror
 
                 </div>
+                <div class="mt-4">
+                    <label for="expiration_datet" class="px-2 md:px-0 font-default font-semibold text-lg text-white">
+                        Temps d'expiration <img class="inline -mt-1 h-6 w-6" src="{{ asset('assets/sablier.png') }}"
+                            alt="">
+                        (Optionnel)
+                    </label>
+                    <br>
+                    <div class="mt-2"></div>
+                    <select name="expiration_date" id="expiration_date"
+                        class="px-2 py-1 m-auto my-2 rounded outline-none appearance-none font-default text-white lg:py-0 lg:my-0 focus:outline-none"
+                        style="background-color : #585858">
+                        <option value="never" selected>Jamais</option>
+                        <option value="1_hour">Une heure</option>
+                        <option value="1_day">Un jour</option>
+                        <option value="1_week">Une semaine</option>
+                        <option value="1_month">Un mois</option>
+                    </select>
+
+                </div>
                 <div id="submit" class="mt-12 text-white">
                     <input type="submit" style="background-color : #585858"
                         class="text-center mb-2 focus:outline-none align-middle px-4 font-default font-semibold cursor-pointer pt-1.5 pb-2 text-2xl rounded"
@@ -104,6 +118,11 @@
                 </div>
             </form>
         </main>
+        <footer id="footer" class="mt-8 mb-4 font-default w-full text-center text-white">
+            <p>Fait avec ❤️ par <a href="https://github.com/Coroxx">Corox</a></p>
+            <p>PandoreNote {{ $version }} - <a class="underline"
+                    href="https://github.com/Coroxx/pandorenote">Github</a></p>
+        </footer>
     </div>
 </body>
 
