@@ -1,10 +1,15 @@
-# https://pandorenote.xyz
+<div align="center">
 
-![alt text](https://i.ibb.co/qMhxgcs/image.png)
+![alt text](https://i.ibb.co/pJKqkyr/image.png)
 
-# PandoreNote est une alternative à Privnote, vous retrouvez des notes chiffrées et autodestructrices.
+<h2>PandoreNote est une alternative à Privnote, vous retrouvez des notes chiffrées et autodestructrices, avec date d'expiration et mot de passe optionnel. </h2>
 
 
-Prochain Patch : 
+<h3> <i> Version 1.1 🚀 </i> </h3>
 
-- Mettre une période d'expiration pour vos notes
+<h2> Url : https://pandorenote.xyz </h2>
+
+<strong> Fait avec ❤️ by Corox </strong>
+  
+
+</div>
