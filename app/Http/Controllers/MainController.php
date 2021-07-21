@@ -126,7 +126,7 @@ class MainController extends Controller
             $note->text = Crypt::decryptString($note->text);
         }
 
-        // $note->delete();
+        $note->delete();
 
         return view('show-note', compact('note'));
     }
