@@ -21,3 +21,9 @@ Route::post('/new-note', 'MainController@create')->name('note.create');
 
 Route::get('/note/{slug}', 'MainController@show')->name('note.display');
 Route::post('/note/{slug}', 'MainController@decrypt')->name('note.decrypt');
+
+
+
+Route::fallback(function () {
+    return redirect()->route('home');
+});
