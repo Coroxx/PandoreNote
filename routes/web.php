@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\AnalyticMiddleware;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,17 +15,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::redirect('/', '/new-note')->name('home');
+Route::middleware([AnalyticMiddleware::class])->group(function () {
+    Route::get('/analytics', 'AnalyticsController@index')->name('analytics');
+
+    Route::redirect('/', '/new-note')->name('home');
 
 
-Route::get('/new-note', 'MainController@index');
-Route::post('/new-note', 'MainController@create')->name('note.create');
+    Route::get('/new-note', 'MainController@index');
+    Route::post('/new-note', 'MainController@create')->name('note.create');
 
-Route::get('/note/{slug}', 'MainController@show')->name('note.display');
-Route::post('/note/{slug}', 'MainController@decrypt')->name('note.decrypt');
+    Route::get('/note/{slug}', 'MainController@show')->name('note.display');
+    Route::post('/note/{slug}', 'MainController@decrypt')->name('note.decrypt');
 
 
 
-Route::fallback(function () {
-    return redirect()->route('home');
+    Route::fallback(function () {
+        return redirect()->route('home');
+    });
 });
