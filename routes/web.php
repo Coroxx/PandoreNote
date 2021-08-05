@@ -21,7 +21,7 @@ Route::middleware([AnalyticMiddleware::class])->group(function () {
     Route::redirect('/', '/new-note')->name('home');
 
 
-    Route::get('/new-note', 'MainController@index');
+    Route::get('/new-note', 'MainController@index')->name('new.note');
     Route::post('/new-note', 'MainController@create')->name('note.create');
 
     Route::get('/note/{slug}', 'MainController@show')->name('note.display');
