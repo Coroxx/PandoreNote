@@ -46,14 +46,14 @@ class AnalyticsController extends Controller
 
 
         $week_devices = $this->forarray($week_requests, $week_devices, 'device');
-        $most_present_device = collect($week_devices)->countBy()->sortDesc()->keys();
+        $most_present_device = collect($week_devices)->filter()->countBy()->sortDesc()->keys();
 
         // Collecting the
 
         $month_routes = [];
 
         $month_routes = $this->forarray($month_requests, $month_routes, 'route');
-        $month_routes = collect($month_routes)->countBy()->sortDesc()->keys();
+        $month_routes = collect($month_routes)->filter()->countBy()->sortDesc()->keys();
 
         // Most present route
 

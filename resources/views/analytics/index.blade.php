@@ -372,7 +372,7 @@ use App\Models\Call;
                     <!--/Graph Card-->
                 </div>
 
-                <div class="w-1/2 p-3 xl:w-2/3">
+                <div class="w-full p-3 md:w-1/2 xl:w-2/3">
                     <!--Graph Card-->
                     <div class="border border-gray-800 rounded shadow bg-main">
                         <div class="p-3 border-b border-gray-800">
@@ -393,10 +393,10 @@ use App\Models\Call;
 
                                             "label": "   REQUESTS",
                                             "data": [
-                                                "{{ Call::whereDate('created_at', Carbon::today()->subDays(3))->count() }}",
-                                                "{{ Call::whereDate('created_at', Carbon::today()->subDays(2))->count() }}",
-                                                "{{ Call::whereDate('created_at', Carbon::yesterday())->count() }}",
-                                                "{{ Call::whereDate('created_at', Carbon::today())->count() }}"
+                                                "{{ isset($most_present_country[3]) ? $week_requests->where('country', $most_present_country[3])->count() : 'NaN' }}",
+                                                "{{ isset($most_present_country[2]) ? $week_requests->where('country', $most_present_country[2])->count() : 'NaN' }}",
+                                                "{{ isset($most_present_country[1]) ? $week_requests->where('country', $most_present_country[1])->count() : 'NaN' }}",
+                                                "{{ isset($most_present_country[0]) ? $week_requests->where('country', $most_present_country[0])->count() : 'NaN' }}",
                                             ],
 
                                             "borderColor": "rgb(255, 99, 132)",
