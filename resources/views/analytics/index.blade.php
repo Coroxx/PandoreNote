@@ -237,7 +237,7 @@ use App\Models\Call;
                                 new Chart(document.getElementById("chartjs-7"), {
                                     "type": "bar",
                                     "data": {
-                                        "labels": ["{{ now()->subDays(2)->format('d/m') }}", "{{ now()->subDays(1)->format('d/m') }}",
+                                        "labels": ["{{ now()->subDays(3)->format('d/m') }}", "{{ now()->subDays(2)->format('d/m') }}",
                                             "Yesterday", "Today"
                                         ],
                                         "datasets": [{
