@@ -32,12 +32,17 @@ class AnalyticMiddleware
         $user_agent = new DeviceDetector($request->header('User-Agent'));
         $user_agent->parse();
 
+        // Grabbing IP behind a possible cloudfare proxy
+        try {
+            $ip = $_SERVER["HTTP_CF_CONNECTING_IP"];
+        } catch (\Throwable $th) {
+            $ip = request()->ip();
+        }
         // Get country by IP
 
-        if ($position = Location::get()) {
+        if ($position = Location::get($ip)) {
             $country = $position->countryName;
         }
-
         // Send data to the database
 
         if (!$user_agent->isBot()) {
