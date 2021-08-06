@@ -38,11 +38,13 @@ class AnalyticMiddleware
         } catch (\Throwable $th) {
             $ip = request()->ip();
         }
+
         // Get country by IP
 
         if ($position = Location::get($ip)) {
             $country = $position->countryName;
         }
+
         // Send data to the database
 
         if (!$user_agent->isBot()) {
@@ -50,7 +52,7 @@ class AnalyticMiddleware
                 'user_agent' => $request->header('User-Agent'),
                 'ip' => request()->ip(),
                 'session_id' => session()->getId(),
-                'country' => $country,
+                'country' => isset($country) ? $country : null,
                 'device' => $user_agent->getDeviceName(),
                 'route' => Route::getCurrentRoute()->getName()
             ]);
