@@ -21,10 +21,10 @@
 
 
         <header>
-            <div id="header" class="py-4 w-full text-white">
+            <div id="header" class="w-full py-4 text-white">
                 <div class="ml-6">
                     <div class="text-center md:text-left">
-                        <h1 class="inline -ml-4 md:ml-0 font-default font-extrabold lg:text-5xl text-2xl"><a
+                        <h1 class="inline -ml-4 text-2xl font-extrabold md:ml-0 font-default lg:text-5xl"><a
                                 href="{{ route('home') }}" class="cursor-pointer">PandoreNote</a>
                         </h1>
                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -35,10 +35,10 @@
                         </svg>
                     </div>
 
-                    <div class="mt-1 md:text-lg md:text-left text-center">
+                    <div class="mt-1 text-center md:text-lg md:text-left">
                         <h3 class="font-default md:ml-0.5 -ml-4 font-semibold">
                             Notes chiffrées et autodestructrice <img src="{{ asset('assets/leaf.png') }}"
-                                class="inline -mt-2 w-6 h-6" alt="leaficon">
+                                class="inline w-6 h-6 -mt-2" alt="leaficon">
                         </h3>
                     </div>
                 </div>
@@ -50,24 +50,24 @@
             }
 
         </style>
-        <main class="md:ml-4 md:text-left text-center">
+        <main class="text-center md:ml-4 md:text-left">
             <form action="{{ route('note.create') }}" method="POST">
                 @csrf
                 @if (session('success'))
-                    <div class="text-green-500 py-2">
+                    <div class="py-2 text-green-500">
                         <p class="font-default">
                             Succès ! Voici le lien de la note : {{ session('success') }}
                         </p>
                     </div>
                 @endif
-                <div class="text-white text-lg">
+                <div class="text-lg text-white">
                     <textarea required name="text" style="background-color : #585858"
-                        class="px-4 focus:outline-none py-2 rounded resize-none w-11/12 h-96 font-semibold"
+                        class="w-11/12 px-4 py-2 font-semibold rounded resize-none focus:outline-none h-96"
                         style="font-family: 'Source Sans Pro', sans-serif;">{{ old('text') }}</textarea>
 
                 </div>
                 @error('text')
-                    <div class="text-red-500 py-2">
+                    <div class="py-2 text-red-500">
                         <p class="font-default">
                             {{ $message }}
                         </p>
@@ -75,16 +75,16 @@
                 @enderror
 
                 <div class="mt-4">
-                    <label for="password_input" class="px-2 md:px-0 font-default font-semibold text-lg text-white">Mot
+                    <label for="password_input" class="px-2 text-lg font-semibold text-white md:px-0 font-default">Mot
                         de passe (Optionnel)
                     </label>
                     <br>
 
                     <input type="text" name="encrypt_password"
-                        class="text-white px-2 font-default focus:outline-none py-1 mt-2 rounded-sm"
+                        class="px-2 py-1 mt-2 text-white rounded-sm font-default focus:outline-none"
                         style="background-color : #585858" id="password_input">
                     @error('encrypt_password')
-                        <div class="text-red-500 py-2">
+                        <div class="py-2 text-red-500">
                             <p class="font-default">
                                 {{ $message }}
                             </p>
@@ -93,15 +93,14 @@
 
                 </div>
                 <div class="mt-4">
-                    <label for="expiration_datet" class="px-2 md:px-0 font-default font-semibold text-lg text-white">
-                        Temps d'expiration <img class="inline -mt-1 h-6 w-6" src="{{ asset('assets/sablier.png') }}"
+                    <label for="expiration_datet" class="px-2 text-lg font-semibold text-white md:px-0 font-default">
+                        Temps d'expiration <img class="inline w-6 h-6 -mt-1" src="{{ asset('assets/sablier.png') }}"
                             alt="">
-                        (Optionnel)
                     </label>
                     <br>
                     <div class="mt-2"></div>
                     <select name="expiration_date" id="expiration_date"
-                        class="px-2 py-1 m-auto my-2 rounded outline-none appearance-none font-default text-white lg:py-0 lg:my-0 focus:outline-none"
+                        class="px-2 py-1 m-auto my-2 text-white rounded outline-none appearance-none font-default lg:py-0 lg:my-0 focus:outline-none"
                         style="background-color : #585858">
                         <option value="never" selected>Jamais</option>
                         <option value="1_hour">Une heure</option>
@@ -118,7 +117,7 @@
                 </div>
             </form>
         </main>
-        <footer id="footer" class="mt-8 mb-4 font-default w-full text-center text-white">
+        <footer id="footer" class="w-full mt-8 mb-4 text-center text-white font-default">
             <p>Fait avec ❤️ par <a href="https://github.com/Coroxx">Corox</a></p>
             <p>PandoreNote {{ $version }} - <a class="underline"
                     href="https://github.com/Coroxx/pandorenote">Github</a></p>
