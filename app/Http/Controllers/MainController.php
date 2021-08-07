@@ -10,13 +10,18 @@ use Illuminate\Support\Facades\Hash;
 
 class MainController extends Controller
 {
+    public function index()
+    {
+        return view('welcome');
+    }
+
     public function create()
     {
         request()->validate(
             [
-            'text' => 'string|required|max:20000',
-            'encrypt_password' => 'string|min:6|max:100|nullable',
-        ],
+                'text' => 'string|required|max:20000',
+                'encrypt_password' => 'string|min:6|max:100|nullable',
+            ],
             [
                 'text.required' => 'Ce champ est obligatoire',
                 'text.string' => 'Le texte est vide ou une une erreur est survenue',
@@ -54,15 +59,15 @@ class MainController extends Controller
                 $expiration_date = date_format(now()->addWeeks(1), 'Y-m-d H:i:s');
             }
         } else {
-            $expiration_date = null ;
+            $expiration_date = null;
         }
 
         if (request()->encrypt_password) {
             $password = Hash::make(request()->encrypt_password);
         } else {
-            $password = 'none' ;
+            $password = 'none';
         }
-        
+
         Note::create([
             'text' => $text,
             'expiration_date' => $expiration_date,
@@ -70,7 +75,7 @@ class MainController extends Controller
             'slug' => $slug,
         ]);
 
-        $link = route('home') . '/' . 'note/' . $slug ;
+        $link = route('home') . '/' . 'note/' . $slug;
 
         return back()->with(['success' => $link]);
     }
@@ -88,7 +93,7 @@ class MainController extends Controller
                 $note->delete();
                 return view('password-note');
             }
-            
+
             if ($note->password === "none") {
                 $password = false;
             } else {
@@ -106,7 +111,7 @@ class MainController extends Controller
             'decrypt_password.string' => 'Le champ est vide ou une erreur est survenue',
             'decrypt_password.max' => 'Le mot de passe ne peut pas faire plus de 100 caractères'
         ]);
-        
+
         $note = Note::where('slug', $slug)->get();
 
 

@@ -19,10 +19,10 @@
 
 
         <header>
-            <div id="header" class="py-4 w-full text-white">
+            <div id="header" class="w-full py-4 text-white">
                 <div class="ml-6">
                     <div class="text-center md:text-left">
-                        <h1 class="inline -ml-4 md:ml-0 font-default font-extrabold lg:text-5xl text-2xl"><a
+                        <h1 class="inline -ml-4 text-2xl font-extrabold md:ml-0 font-default lg:text-5xl"><a
                                 href="{{ route('home') }}" class="cursor-pointer">PandoreNote</a>
                         </h1>
                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -33,10 +33,10 @@
                         </svg>
                     </div>
 
-                    <div class="mt-1 md:text-lg md:text-left text-center">
+                    <div class="mt-1 text-center md:text-lg md:text-left">
                         <h3 class="font-default md:ml-0.5 -ml-4 font-semibold">
                             Notes chiffrées et autodestructrice <img src="{{ asset('assets/leaf.png') }}"
-                                class="inline -mt-2 w-6 h-6" alt="leaficon">
+                                class="inline w-6 h-6 -mt-2" alt="leaficon">
                         </h3>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
             }
 
         </style>
-        <main class="md:ml-4 md:text-left text-center">
+        <main class="text-center md:ml-4 md:text-left">
             @if (!isset($note))
                 <div class="text-red-500 py-2 text-xl px-2 md:px-0 md:ml-2.5">
                     <p class="font-default">
@@ -60,7 +60,7 @@
                     @csrf
                     <div class="ml-2.5 mt-10">
                         @if ($password)
-                            <h2 class="font-default px-2 md:px-0 font-bold text-xl text-white">Entrez le mot de passe de
+                            <h2 class="px-2 text-xl font-bold text-white font-default md:px-0">Entrez le mot de passe de
                                 la
                                 note</h2>
                             <input type="password" required
@@ -69,7 +69,7 @@
                             <br>
                             <br>
                             @if ($errors->any())
-                                <div class="text-red-500 py-2">
+                                <div class="py-2 text-red-500">
                                     <p class="font-default">
                                         {{ $errors->first() }}
                                     </p>
@@ -79,8 +79,8 @@
                         @endif
                         <input type="submit" style="background-color : #585858"
                             class="text-center focus:outline-none text-white align-middle px-4 font-default font-semibold cursor-pointer pt-1.5 pb-2 text-xl rounded"
-                            value="Déchiffrer">
-                        <p class="font-default text-white mt-8 px-2 md:px-0">Après avoir déchiffré cette note, elle
+                            value="Déchiffrer" onclick="disableButton(this)">
+                        <p class="px-2 mt-8 text-white font-default md:px-0">Après avoir déchiffré cette note, elle
                             sera
                             supprimée de
                             la
@@ -92,6 +92,14 @@
             @endif
         </main>
     </div>
+
+    <script>
+        function disableButton(e) {
+            setTimeout(function() {
+                e.disabled = true;
+            }, (100));
+        }
+    </script>
 </body>
 
 </html>
