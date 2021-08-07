@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Call;
 use App;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class AnalyticsController extends Controller
@@ -17,6 +18,9 @@ class AnalyticsController extends Controller
 
         return $array;
     }
+
+
+
 
     public function indexLang()
     {
@@ -79,5 +83,40 @@ class AnalyticsController extends Controller
 
 
         return view('analytics.index', compact('unique_users_today', 'today_requests', 'unique_users_week', 'month_routes', 'most_present_device', 'most_present_country', 'week_requests', 'most_visited_route', 'no_visited_route'));
+    }
+
+
+    public function loginIndex()
+    {
+        if (auth()->user()) {
+            return redirect()->route('analytics.index');
+        } else {
+            return view('analytics.login');
+        }
+    }
+
+    public function loginPost()
+    {
+        request()->validate([
+            'username' => 'required|string|exists:users|string',
+            'password' => 'required|min:6|max:24|string',
+        ], [
+            'username.string' => 'Une erreur est survenue, le champ est peut-être vide',
+            'username.required' => 'Une erreur est survenue, le champ est peut-être vide',
+            'username.exists' => 'Le nom d\'utilisateur n\'existe pas.',
+            'password.min' => 'Le mot de passe fait au moins 6 caractères !',
+            'password.max' => 'Le mot de passe fait maximum 24 caractères !',
+            'password.string' => 'Une erreur est survenue, le champ est peut-être vide!',
+        ]);
+
+        $credentials = request()->only('username', 'password');
+
+        if (Auth::attempt($credentials, true)) {
+            request()->session()->regenerate();
+
+            return redirect()->route('analytics.index');
+        } else {
+            return back()->withErrors(['bad_creds' => 'Identifiants incorrects']);
+        }
     }
 }

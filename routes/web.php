@@ -15,11 +15,16 @@ use App\Http\Middleware\AnalyticMiddleware;
 |
 */
 
+
 Route::get('/analytics/login', 'AnalyticsController@loginIndex')->name('analytics.login');
 Route::post('/analytics/login', 'AnalyticsController@loginPost')->name('analytics.login.post');
 
-Route::get('/analytics/{lang}', 'AnalyticsController@index')->name('analytics');
-Route::get('/analytics', 'AnalyticsController@indexLang')->name('analytics.index');
+Route::middleware('auth')->group(function () {
+    Route::get('/analytics/{lang}', 'AnalyticsController@index')->name('analytics');
+    Route::get('/analytics', 'AnalyticsController@indexLang')->name('analytics.index');
+});
+
+
 
 
 Route::middleware([AnalyticMiddleware::class])->group(function () {
