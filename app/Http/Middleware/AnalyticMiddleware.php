@@ -32,17 +32,20 @@ class AnalyticMiddleware
         $user_agent = new DeviceDetector($request->header('User-Agent'));
         $user_agent->parse();
 
+        // Get country by IP
+
         // Grabbing IP behind a possible cloudfare proxy
+
         try {
             $ip = $_SERVER["HTTP_CF_CONNECTING_IP"];
         } catch (\Throwable $th) {
             $ip = request()->ip();
         }
 
-        // Get country by IP
-
         if ($position = Location::get($ip)) {
             $country = $position->countryName;
+        } else {
+            $country = 'Unknow';
         }
 
         // Send data to the database
@@ -52,7 +55,7 @@ class AnalyticMiddleware
                 'user_agent' => $request->header('User-Agent'),
                 'ip' => request()->ip(),
                 'session_id' => session()->getId(),
-                'country' => isset($country) ? $country : null,
+                'country' => $country,
                 'device' => $user_agent->getDeviceName(),
                 'route' => Route::getCurrentRoute()->getName()
             ]);
