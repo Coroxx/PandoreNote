@@ -30,13 +30,13 @@ class Kernel extends ConsoleKernel
             $calls = Call::wheredate('created_at', '>=', now()->subHours(2))->get();
 
             foreach ($calls as $call) {
-                if (isset($call->route)) {
+                if (!isset($call->route)) {
                     $call->delete();
                 } else {
                     isset($call->device) ? '' : $call->delete();
                 }
             }
-        })->hourly();
+        })->everyMinute();
     }
 
     /**
