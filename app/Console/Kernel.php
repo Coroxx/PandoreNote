@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+
+use App\Models\Call;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -24,7 +26,17 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            $calls = Call::wheredate('created_at', '>=', now()->subHours(2))->get();
+
+            foreach ($calls as $call) {
+                if (isset($call->route)) {
+                    $call->delete();
+                } else {
+                    isset($call->device) ? '' : $call->delete();
+                }
+            }
+        })->hourly();
     }
 
     /**
@@ -34,7 +46,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
