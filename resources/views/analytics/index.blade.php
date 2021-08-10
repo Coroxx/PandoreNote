@@ -409,7 +409,7 @@ use App\Models\Call;
                                         ],
                                         "datasets": [{
 
-                                            "label": "   {{ __('dashboard.requests') }}",
+                                            "label": "   {{ __('dashboard.different_ip') }}",
                                             "data": [
                                                 `{{ isset($most_present_countries[3]) ? $unique_ip_week->where('country', $most_present_countries[3])->count() : 'NaN' }}`,
                                                 "{{ isset($most_present_countries[2]) ? $unique_ip_week->where('country', $most_present_countries[2])->count() : 'NaN' }}",

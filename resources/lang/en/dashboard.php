@@ -20,5 +20,5 @@ return [
     'most_present_countries' => 'COUNTRIES (LAST 7 DAYS)',
     'footer_bio' => 'A powerfull and elegant Google Analytics alternative who respects your privacy',
     'footer_bio2' => 'Made with ❤️ by Coroxx',
-    'differents_ip' => 'Different ip'
+    'different_ip' => 'Different IP'
 ];
