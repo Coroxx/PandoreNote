@@ -42,22 +42,23 @@ class AnalyticsController extends Controller
 
         $unique_users_today = Call::whereDate('created_at', Carbon::today())->distinct('session_id')->count();
         $unique_users_week = Call::whereDate('created_at', '>=', now()->subWeek(1))->distinct('session_id')->count();
+        $unique_ip_week = Call::whereDate('created_at', '>=', now()->subWeek(1))->get()->unique('ip');
 
-        // Get requests by date 
+        // Get requests by date
 
         $today_requests = Call::whereDate('created_at', Carbon::today())->count();
         $week_requests = Call::whereDate('created_at', '>=', now()->subDays(7))->get();
         $month_requests = Call::whereDate('created_at', '>=', now()->subMonth(1))->get();
 
 
-        // Collecting the most present country 
+        // Collecting the most present country
 
         $week_countries = [];
 
-        $week_countries = $this->forarray($week_requests, $week_countries, 'country');
-        $most_present_country = collect($week_countries)->filter()->countBy()->sortDesc()->keys();
+        $week_countries = $this->forarray($unique_ip_week, $week_countries, 'country');
+        $most_present_countries = collect($week_countries)->filter()->countBy()->sortDesc()->keys();
 
-        // Collecting the most present device 
+        // Collecting the most present device
 
         $week_devices = [];
 
@@ -82,7 +83,7 @@ class AnalyticsController extends Controller
 
 
 
-        return view('analytics.index', compact('unique_users_today', 'today_requests', 'unique_users_week', 'month_routes', 'most_present_device', 'most_present_country', 'week_requests', 'most_visited_route', 'no_visited_route'));
+        return view('analytics.index', compact('unique_users_today', 'unique_ip_week', 'today_requests', 'unique_users_week', 'month_routes', 'most_present_device', 'most_present_countries', 'week_requests', 'most_visited_route', 'no_visited_route'));
     }
 
 

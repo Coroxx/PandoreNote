@@ -58,7 +58,7 @@ use App\Models\Call;
                 <p class="text-sm font-bold text-white"><a class="hover:underline"
                         href="https://github.com/Coroxx/EvilAnalytics" rel="noreferrer" target=" _blank">Github -
                         Version
-                        1.3</a>
+                        1.3.2</a>
                 </p>
             </div>
             <div id="lang" class="w-full text-center md:w-auto md:absolute md:text-left md:m-0 top-4 right-4">
@@ -131,7 +131,7 @@ use App\Models\Call;
                             <div class="flex-1 text-right md:text-center">
                                 <h5 class="-mt-1 font-bold text-red-500 uppercase">{{ __('dashboard.week_country') }}
                                 </h5>
-                                <h3 class="mt-1 text-2xl font-bold text-white">{{ $most_present_country->first() }}
+                                <h3 class="mt-1 text-2xl font-bold text-white">{{ $most_present_countries->first() }}
                                 </h3>
                             </div>
                         </div>
@@ -401,19 +401,21 @@ use App\Models\Call;
                                 new Chart(document.getElementById("chartjs-1"), {
                                     "type": "bar",
                                     "data": {
-                                        "labels": ["{{ isset($most_present_country[3]) ? ucfirst($most_present_country[3]) : 'NaN' }}",
-                                            "{{ isset($most_present_country[2]) ? ucfirst($most_present_country[2]) : 'NaN' }}",
-                                            "{{ isset($most_present_country[1]) ? ucfirst($most_present_country[1]) : 'NaN' }}",
-                                            "{{ isset($most_present_country[0]) ? ucfirst($most_present_country[0]) : 'NaN' }}",
+                                        "labels": [
+                                            "{{ isset($most_present_countries[3]) ? ucfirst($most_present_countries[3]) : 'NaN' }}",
+                                            "{{ isset($most_present_countries[2]) ? ucfirst($most_present_countries[2]) : 'NaN' }}",
+                                            "{{ isset($most_present_countries[1]) ? ucfirst($most_present_countries[1]) : 'NaN' }}",
+                                            "{{ isset($most_present_countries[0]) ? ucfirst($most_present_countries[0]) : 'NaN' }}",
                                         ],
                                         "datasets": [{
 
                                             "label": "   {{ __('dashboard.requests') }}",
                                             "data": [
-                                                "{{ isset($most_present_country[3]) ? $week_requests->where('country', $most_present_country[3])->count() : 'NaN' }}",
-                                                "{{ isset($most_present_country[2]) ? $week_requests->where('country', $most_present_country[2])->count() : 'NaN' }}",
-                                                "{{ isset($most_present_country[1]) ? $week_requests->where('country', $most_present_country[1])->count() : 'NaN' }}",
-                                                "{{ isset($most_present_country[0]) ? $week_requests->where('country', $most_present_country[0])->count() : 'NaN' }}",
+                                                `{{ isset($most_present_countries[3]) ? $unique_ip_week->where('country', $most_present_countries[3])->count() : 'NaN' }}`,
+                                                "{{ isset($most_present_countries[2]) ? $unique_ip_week->where('country', $most_present_countries[2])->count() : 'NaN' }}",
+                                                "{{ isset($most_present_countries[1]) ? $unique_ip_week->where('country', $most_present_countries[1])->count() : 'NaN' }}",
+                                                "{{ isset($most_present_countries[0]) ? $unique_ip_week->where('country', $most_present_countries[0])->count() : 'NaN' }}",
+
                                             ],
 
                                             "borderColor": "rgb(255, 99, 132)",
