@@ -7,6 +7,7 @@ use App\Models\Call;
 use App;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 
 class AnalyticsController extends Controller
 {
@@ -82,8 +83,18 @@ class AnalyticsController extends Controller
         $no_visited_route = $month_routes->last();
 
 
-
-        return view('analytics.index', compact('unique_users_today', 'unique_ip_week', 'today_requests', 'unique_users_week', 'month_routes', 'most_present_device', 'most_present_countries', 'week_requests', 'most_visited_route', 'no_visited_route'));
+        return view('analytics.index', compact(
+            'unique_users_today',
+            'unique_ip_week',
+            'today_requests',
+            'unique_users_week',
+            'month_routes',
+            'most_present_device',
+            'most_present_countries',
+            'week_requests',
+            'most_visited_route',
+            'no_visited_route'
+        ));
     }
 
 
