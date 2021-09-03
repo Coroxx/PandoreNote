@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function () {
-            $data = Call::whereDate('created_at', '>=', now()->subDay(1))->get();
+            $data = Call::whereDate('created_at', '>=', now()->subDays(10))->get();
 
             foreach ($data as $object) {
                 $provider = json_decode(Http::withUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15')->get("https://rdap.arin.net/registry/ip/$object->ip")->body())->name;
