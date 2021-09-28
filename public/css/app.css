@@ -22334,7 +22334,7 @@ video {
 }
 
 .font-default {
-  font-family: Inter;
+  font-family: Inter, Arial;
 }
 
 .text-xs {
@@ -53590,7 +53590,7 @@ video {
   }
 
   .sm\:font-default {
-    font-family: Inter;
+    font-family: Inter, Arial;
   }
 
   .sm\:text-xs {
@@ -84809,7 +84809,7 @@ video {
   }
 
   .md\:font-default {
-    font-family: Inter;
+    font-family: Inter, Arial;
   }
 
   .md\:text-xs {
@@ -116028,7 +116028,7 @@ video {
   }
 
   .lg\:font-default {
-    font-family: Inter;
+    font-family: Inter, Arial;
   }
 
   .lg\:text-xs {
@@ -147247,7 +147247,7 @@ video {
   }
 
   .xl\:font-default {
-    font-family: Inter;
+    font-family: Inter, Arial;
   }
 
   .xl\:text-xs {
@@ -178466,7 +178466,7 @@ video {
   }
 
   .\32xl\:font-default {
-    font-family: Inter;
+    font-family: Inter, Arial;
   }
 
   .\32xl\:text-xs {
