@@ -28,8 +28,8 @@
                                 href="{{ route('home') }}" class="cursor-pointer">PandoreNote</a>
                         </h1>
                         <svg xmlns="http://www.w3.org/2000/svg"
-                            class="lg:h-12 lg:w-12 w-8 h-8 -ml-0.5 -mt-4 lg:-mt-7 inline" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
+                            class="lg:h-12 lg:w-12 w-8 h-8 -ml-0.5 -mt-4 lg:-mt-7 inline" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
@@ -37,7 +37,7 @@
 
                     <div class="mt-1 text-center md:text-lg md:text-left">
                         <h3 class="font-default md:ml-0.5 -ml-4 font-semibold">
-                            Notes chiffrées et autodestructrice <img src="{{ asset('assets/leaf.png') }}"
+                            Notes chiffrées et auto-destructrices <img src="{{ asset('assets/leaf.png') }}"
                                 class="inline w-6 h-6 -mt-2" alt="leaficon">
                         </h3>
                     </div>
