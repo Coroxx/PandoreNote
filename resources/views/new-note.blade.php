@@ -102,7 +102,7 @@
             </div>
         </form>
     </main>
-    <footer class="w-full pb-2 md:mt-4">
+    <footer class="absolute bottom-0 w-full pb-2 md:mt-4">
         <div>
             <div class="ml-4 md:text-center md:ml-0">
                 <p><a href="https://github.com/Coroxx/PandoreNote" target="_blank" rel="noopener noreferrer">Github -
