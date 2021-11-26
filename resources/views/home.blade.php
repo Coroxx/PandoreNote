@@ -14,11 +14,6 @@
 </head>
 
 <style>
-    @font-face {
-        font-family: Outfit;
-        src: url("https://pandorenote.xyz/fonts/OutFit-ExtraBold.ttf") format("truetype");
-    }
-
     *::-webkit-scrollbar {
         display: none;
     }

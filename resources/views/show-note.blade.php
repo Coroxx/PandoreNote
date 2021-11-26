@@ -13,16 +13,6 @@
 </head>
 
 <style>
-    @font-face {
-        font-family: Outfit;
-        src: url("fonts/OutFit-ExtraBold.ttf") format("truetype");
-    }
-
-    @font-face {
-        font-family: Outfit-regular;
-        src: url('fonts/Outfit-Regular.ttf') format("truetype");
-    }
-
     *::-webkit-scrollbar {
         display: none;
     }
@@ -31,18 +21,6 @@
     body {
         height: 100%;
         background-color: #1C1C1C;
-    }
-
-    .font-default {
-        font-family: Outfit, Arial;
-        font-weight: 800;
-        font-style: normal;
-    }
-
-    .font-default-light {
-        font-family: Outfit-regular, Arial;
-        font-weight: 400;
-        font-style: normal;
     }
 
 </style>
@@ -58,7 +36,7 @@
                     </div>
 
                     <div class="mt-1 text-center md:text-lg md:text-left">
-                        <h3 class="font-default md:ml-0.5 -ml-4 font-semibold">
+                        <h3 class="font-outfit md:ml-0.5 -ml-4">
                             Notes chiffrées et autodestructrice <img src="{{ asset('assets/lock.png') }}"
                                 class="inline w-5 h-5 -mt-1.5 ml-1" alt="leaficon">
                         </h3>
@@ -77,7 +55,7 @@
                 @csrf
                 <div class="mt-10 ml-2 text-center text-white md:text-left">
                     <div class="w-full">
-                        <p class="break-words pl-1.5 pr-8 font-default-light whitespace-pre-line">
+                        <p class="break-words pl-1.5 pr-8 font-outfit whitespace-pre-line">
                             {{ $note->text }}
                         </p>
                     </div>
