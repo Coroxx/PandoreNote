@@ -12,10 +12,22 @@ class MainController extends Controller
 {
     public function index()
     {
-        return view('welcome');
+        return view('home');
+    }
+
+    public function indexAbout()
+    {
+        return view('about');
     }
 
     public function create()
+    {
+        return view('new-note');
+    }
+
+
+
+    public function store()
     {
         request()->validate(
             [
@@ -49,18 +61,24 @@ class MainController extends Controller
         }
 
         if (request()->expiration_date !== 'never') {
-            if (request()->expiration_date === '1_hour') {
-                $expiration_date = date_format(now()->addHours(1), 'Y-m-d H:i:s');
-            } elseif (request()->expiration_date === '1_day') {
-                $expiration_date = date_format(now()->addDays(1), 'Y-m-d H:i:s');
-            } elseif (request()->expiration_date === '1_month') {
-                $expiration_date = date_format(now()->addMonths(1), 'Y-m-d H:i:s');
-            } elseif (request()->expiration_date === '1_week') {
-                $expiration_date = date_format(now()->addWeeks(1), 'Y-m-d H:i:s');
+            switch (request()->expiration_date) {
+                case '1_hour':
+                    $expiration_date = date_format(now()->addHours(1), 'Y-m-d H:i:s');
+                    break;
+                case '1_day':
+                    $expiration_date = date_format(now()->addDays(1), 'Y-m-d H:i:s');
+                    break;
+                case '1_month':
+                    $expiration_date = date_format(now()->addMonths(1), 'Y-m-d H:i:s');
+                    break;
+                case '1_week':
+                    $expiration_date = date_format(now()->addWeeks(1), 'Y-m-d H:i:s');
+                    break;
             }
         } else {
             $expiration_date = null;
         }
+
 
         if (request()->encrypt_password) {
             $password = Hash::make(request()->encrypt_password);
@@ -94,11 +112,7 @@ class MainController extends Controller
                 return view('password-note');
             }
 
-            if ($note->password === "none") {
-                $password = false;
-            } else {
-                $password = true;
-            }
+            $note->password === "none" ? $password = false :  $password = true;
         }
         return view('password-note', compact('note', 'password'));
     }

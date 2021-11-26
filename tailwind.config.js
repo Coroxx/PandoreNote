@@ -11,9 +11,16 @@ module.exports = {
     darkMode: false, // or 'media' or 'class'
     theme: {
         fontFamily: {
-            'default': ['Inter', 'Arial'],
+            // 'default': ['Outfit', 'Arial'],
         },
-        extend: {},
+        extend: {
+            inset: {
+                '5/12': '44%',
+            },
+            screens: {
+                '2sm': '350px',
+            },
+        },
     },
     variants: {
         extend: {},

@@ -29,11 +29,12 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware([AnalyticMiddleware::class])->group(function () {
 
-    Route::redirect('/', '/new-note')->name('home');
+    Route::get('/', 'MainController@index')->name('home');
 
 
-    Route::get('/new-note', 'MainController@index')->name('new.note');
-    Route::post('/new-note', 'MainController@create')->name('note.create');
+    Route::get('/about', 'MainController@indexAbout')->name('about');
+    Route::get('/new-note', 'MainController@create')->name('new.note');
+    Route::post('/new-note', 'MainController@store')->name('note.create');
 
     Route::get('/note/{slug}', 'MainController@show')->name('note.display');
     Route::post('/note/{slug}', 'MainController@decrypt')->name('note.decrypt');
