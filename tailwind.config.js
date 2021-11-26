@@ -1,3 +1,7 @@
+const {
+    fontFamily
+} = require('tailwindcss/defaultTheme');
+
 module.exports = {
     purge: [
         "./app/**/*.php",
@@ -10,15 +14,17 @@ module.exports = {
     ],
     darkMode: false, // or 'media' or 'class'
     theme: {
-        fontFamily: {
-            // 'default': ['Outfit', 'Arial'],
-        },
+
         extend: {
             inset: {
                 '5/12': '44%',
             },
             screens: {
                 '2sm': '350px',
+            },
+            fontFamily: {
+                outfit: ['Outfit', ...fontFamily.sans],
+                // 'default': ['Outfit', 'Arial'],
             },
         },
     },
