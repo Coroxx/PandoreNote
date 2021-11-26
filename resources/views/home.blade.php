@@ -16,7 +16,7 @@
 <style>
     @font-face {
         font-family: Outfit;
-        src: url("fonts/OutFit-ExtraBold.ttf") format("truetype");
+        src: url("https://pandorenote.xyz/fonts/OutFit-ExtraBold.ttf") format("truetype");
     }
 
     *::-webkit-scrollbar {
