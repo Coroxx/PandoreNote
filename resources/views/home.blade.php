@@ -27,6 +27,11 @@
     }
 
     html {
+        background-color: #1C1C1C;
+    }
+
+
+    body {
         background: rgb(28, 28, 28);
         background: linear-gradient(180deg, rgba(28, 28, 28, 1) 0%, rgba(40, 43, 43, 1) 89%);
     }
