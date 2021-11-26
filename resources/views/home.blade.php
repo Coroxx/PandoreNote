@@ -32,7 +32,6 @@
         /* background-color: #1C1C1C; */
         background: rgb(28, 28, 28);
         background: linear-gradient(180deg, rgba(28, 28, 28, 1) 0%, rgba(40, 43, 43, 1) 89%);
-
     }
 
 
@@ -108,7 +107,7 @@
 
 <body class="overflow-hidden text-white select-none fadeIn">
     <div id="menu" class="absolute left-0 hidden h-screen font-default w-44">
-        <div class="w-full h-screen text-center">
+        <div class="w-full h-screen text-center font-default">
             <h2 class="ml-8 text-3xl mt-36">
                 <a href="{{ route('new.note') }}">Créer une note</a>
             </h2>
