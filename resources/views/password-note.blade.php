@@ -49,14 +49,14 @@
             </div>
         </header>
         <main class="text-center md:ml-4 md:text-left">
-            @if (!isset($note))
+            @if (is_null($note))
                 <div class="text-red-500 py-2 text-xl px-2 md:px-0 md:ml-2.5">
                     <p class="font-extrabold font-outfit"">
                         Désolé cette note n'existe pas, elle a déjà été lue ou sa date d'expiration est dépassée
                     </p>
                 </div>
-@else
-                <form action=" {{ route('note.decrypt', $note->slug) }}" method="POST">
+            @else
+                <form action=" {{ route('note.decrypt', $note->slug ?? '') }}" method="POST">
                         @csrf
                     <div class="ml-2.5 mt-10">
                         @if ($password)
@@ -75,7 +75,6 @@
                                         {{ $errors->first() }}
                                     </p>
                                 </div>
-
                             @endif
                         @endif
                         <input type="submit" style="background-color : #282828"

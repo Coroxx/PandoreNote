@@ -149,8 +149,10 @@
             </div>
 
             <div class="content md:left-1/2 left-2/3 md:top-1/2 top-5/12">
-                <img src="{{ asset('assets/logo.png') }}" class="z-0 lg:w-44 md:w-40 w-36" alt=""
-                    class="m-auto">
+                <a href="{{ route('new.note') }}">
+                    <img src="{{ asset('assets/logo.png') }}" class="z-0 lg:w-44 md:w-40 w-36" alt=""
+                        class="m-auto">
+                </a>
             </div>
         </main>
 

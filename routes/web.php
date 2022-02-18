@@ -29,17 +29,17 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware([AnalyticMiddleware::class])->group(function () {
 
-    Route::get('/', 'MainController@index')->name('home');
+    Route::get('/', 'NoteController@index')->name('home');
 
+    Route::get('/about', function () {
+        return view('about');
+    })->name('about');
 
-    Route::get('/about', 'MainController@indexAbout')->name('about');
-    Route::get('/new-note', 'MainController@create')->name('new.note');
-    Route::post('/new-note', 'MainController@store')->name('note.create');
+    Route::get('/new-note', 'NoteController@create')->name('new.note');
+    Route::post('/new-note', 'NoteController@store')->name('note.create');
 
-    Route::get('/note/{slug}', 'MainController@show')->name('note.display');
-    Route::post('/note/{slug}', 'MainController@decrypt')->name('note.decrypt');
-
-
+    Route::get('/note/{slug}', 'NoteController@show')->name('note.display');
+    Route::post('/note/{slug}', 'NoteController@decrypt')->name('note.decrypt');
 
     Route::fallback(function () {
         return redirect()->route('home');
