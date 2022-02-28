@@ -79,7 +79,7 @@ class NoteController extends Controller
         }
 
 
-        $request->encrypt_password ? $password = Hash::make($request->encrypt_password) : $password = 'none';
+        $request->encrypt_password ? $password = \Hash::make($request->encrypt_password) : $password = 'none';
 
         $note = Note::create([
             'text' => \Crypt::encryptString($request->text),
